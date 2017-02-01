@@ -23,7 +23,7 @@
 		//$quick = 빠른방법으로 뽑아낼 것인지 deafult = quick
 		public function Color($img,$type=NULL){
 			if($type > 1) $this->cut_size = $type; //이미지를 자를 갯수의 제곱근 혹은 sqrt(갯수); 이수치가 증가하면 연산속도가 감소합니다.
-			else $type = 5;
+			else $this->cut_size = 5;
 			if(gettype($img) == "array") $img = (object) $img; //array타입의 img정보를 object형식으로 변경합니다.
 			else if(gettype($img) == "string"){
 				$tmp = $img;
@@ -41,7 +41,7 @@
 			$this->base_size = getimagesize($this->tmp);
 			$tmp = explode("/",$this->base_size["mime"]);
 			$this->mime_type = $tmp[1];
-			if(empty($type) || $type <= 1){
+			if(empty($this->cut_size) || $this->cut_size <= 1){
 				$color = $this->QuickSetting();
 			}else{
 				$this->CutSetting();
