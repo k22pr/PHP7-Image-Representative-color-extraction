@@ -21,7 +21,7 @@
 		////////////////////////////////////////////////////////
 		//$img = 업로드된 이미지나 이미지의 경로
 		//$quick = 빠른방법으로 뽑아낼 것인지 deafult = quick
-		public function Color($img,$type=NULL){
+		public function Color(string $img,$type=NULL){
 			if($type > 1) $this->cut_size = $type; //이미지를 자를 갯수의 제곱근 혹은 sqrt(갯수); 이수치가 증가하면 연산속도가 감소합니다.
 			else $this->cut_size = 5;
 			if(gettype($img) == "array") $img = (object) $img; //array타입의 img정보를 object형식으로 변경합니다.
@@ -39,6 +39,8 @@
 			//이미지의 사이즈와 MIME타입을 구해냅니다.
 			$this->tmp = $img->tmp_name;
 			$this->base_size = getimagesize($this->tmp);
+			//지원하지 않는 이미지의 형식
+			if(empty($this->base_size["mime"])) return false;
 			$tmp = explode("/",$this->base_size["mime"]);
 			$this->mime_type = $tmp[1];
 			if(empty($this->cut_size) || $this->cut_size <= 1){
@@ -170,7 +172,7 @@
 			return ($img);
 		}
 		
-		public function dec($arr){
+		public function hex($arr){
 			$arr[0] = str_pad(dechex($arr[0]),2,'0',STR_PAD_LEFT);
 			$arr[1] = str_pad(dechex($arr[1]),2,'0',STR_PAD_LEFT);
 			$arr[2] = str_pad(dechex($arr[2]),2,'0',STR_PAD_LEFT);
