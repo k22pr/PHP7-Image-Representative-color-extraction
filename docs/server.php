@@ -20,7 +20,10 @@
 			else{
 				if(!is_dir("./tmp")) mkdir("tmp");
 				$this->tmp = "./tmp/tmp.".end($this->type);
+				
+				if(is_file($this->tmp)) unlink($this->tmp);
 				if(!copy($this->img["tmp_name"],$this->tmp)) $this->makeError(1);
+				
 				else{
 					$this->time[] = $this->nowtime();
 					$this->ic = $this->color->Color($this->tmp);
@@ -30,8 +33,6 @@
 					$this->MakeDOM();
 				}
 			}
-			
-			unset($this->tmp);
 		}
 		
 		private function makeError(int $get){

@@ -1,2 +1,2 @@
 # PHP7-Representative-color-extraction
-It extracts the representative color of the image.
+## http://k22pr.github.io/PHP7-Image-Representative-color-extraction/
